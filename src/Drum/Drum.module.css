@@ -1,0 +1,4 @@
+.Drum {
+  display: flex;
+  flex-direction: column;
+}
