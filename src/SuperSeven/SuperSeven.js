@@ -12,6 +12,18 @@ function SuperSeven() {
   const [gain, setGain] = useState(0)
   const [gameOn, setGameOn] = useState(false)
   const [drumsData, setDrumsData] = useState({})
+  const [gainData, setGainData] = useState([])
+  const [changedPids, setChangedPids] = useState({})
+
+  useEffect(() => {
+    const changedOptions = options.pids
+
+    Object.entries(changedOptions).reduce((acc, [value, key]) => {
+      acc[key] = value
+      setChangedPids(acc)
+      return acc
+    }, {})
+  }, [])
 
   const randomizer = (data) => {
     const count = 3
@@ -20,7 +32,9 @@ function SuperSeven() {
     for (let i = 0; i < count; i += 1) {
       const randomIndex = Math.floor(Math.random() * data.length)
       const randomNumber = data[randomIndex]
-      result.push(randomNumber)
+      const randomFruit = changedPids[randomNumber]
+      // console.log(changedPids[randomNumber])
+      result.push(randomFruit)
     }
 
     return result
@@ -49,8 +63,40 @@ function SuperSeven() {
   const countGain = () => {
     const dataToAnalysis = Object.values(drumsData)
 
-    console.log()
+    let newArr = []
+
+    dataToAnalysis.reduce((acc, current) => {
+      newArr = [...newArr, ...current]
+
+      if (newArr[0] === newArr[3] && newArr[3] === newArr[6]) {
+        acc.push(newArr[0])
+      }
+
+      if (newArr[1] === newArr[4] && newArr[4] === newArr[7]) {
+        acc.push(newArr[1])
+      }
+
+      if (newArr[2] === newArr[5] && newArr[5] === newArr[8]) {
+        acc.push(newArr[2])
+      }
+
+      setGainData([...acc])
+      return acc
+      // if (acc && acc.length !== 0) {
+      //   setGainData([...acc])
+      // }
+    }, [])
+
+    console.log(newArr)
+
+    console.log(gainData)
+
+    if (gainData.length !== 0) {
+      gainData.map((element) => {})
+    }
   }
+
+  // console.log(gainData)
 
   const startGame = () => {
     setGameOn(!gameOn)
@@ -84,9 +130,9 @@ function SuperSeven() {
       <div className={styles.SuperSeven}>
         {Object.keys(drumsData).length === 0 ? (
           <>
-            <Drum key={uuidv4()} data={[1, 1, 1]}></Drum>
-            <Drum key={uuidv4()} data={[1, 1, 1]}></Drum>
-            <Drum key={uuidv4()} data={[1, 1, 1]}></Drum>
+            <Drum key={uuidv4()} data={["START", "START", "START"]}></Drum>
+            <Drum key={uuidv4()} data={["START", "START", "START"]}></Drum>
+            <Drum key={uuidv4()} data={["START", "START", "START"]}></Drum>
           </>
         ) : (
           Object.values(drumsData).map((arr) => {
