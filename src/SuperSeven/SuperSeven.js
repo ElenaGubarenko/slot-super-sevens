@@ -61,39 +61,66 @@ function SuperSeven() {
   }
 
   const countGain = () => {
-    const dataToAnalysis = Object.values(drumsData)
+    let numberOfIndex = 0
+    const gainElements = []
+    let gain = ""
+    const analysis = Object.values(drumsData)
 
-    let newArr = []
+    const recursion = (arr, index) => {
+      for (let i = 0; i < arr.length; i += 1) {
+        if (gain === "") {
+          gain = arr[i][index]
+          continue
+        }
 
-    dataToAnalysis.reduce((acc, current) => {
-      newArr = [...newArr, ...current]
+        if (arr[i][index] === gain && i + 1 !== arr.length) {
+          continue
+        }
 
-      if (newArr[0] === newArr[3] && newArr[3] === newArr[6]) {
-        acc.push(newArr[0])
+        if (arr[i][index] !== gain) {
+          gain = ""
+          numberOfIndex += 1
+          recursion(analysis, numberOfIndex)
+          break
+        }
+
+        if (arr[i][index] && arr[i][index] === gain && i + 1 === arr.length) {
+          gainElements.push(gain)
+          gain = ""
+          numberOfIndex += 1
+          recursion(analysis, numberOfIndex)
+          break
+        }
       }
 
-      if (newArr[1] === newArr[4] && newArr[4] === newArr[7]) {
-        acc.push(newArr[1])
-      }
-
-      if (newArr[2] === newArr[5] && newArr[5] === newArr[8]) {
-        acc.push(newArr[2])
-      }
-
-      setGainData([...acc])
-      return acc
+      // const dataToAnalysis = Object.values(drumsData)
+      // let newArr = []
+      // dataToAnalysis.reduce((acc, current) => {
+      //   newArr = [...newArr, ...current]
+      //   if (newArr[0] === newArr[3] && newArr[0] === newArr[6]) {
+      //     acc.push(newArr[0])
+      //   }
+      //   if (newArr[1] === newArr[4] && newArr[1] === newArr[7]) {
+      //     acc.push(newArr[1])
+      //   }
+      //   if (newArr[2] === newArr[5] && newArr[2] === newArr[8]) {
+      //     acc.push(newArr[2])
+      //   }
+      //   setGainData([...acc])
+      //   return acc
       // if (acc && acc.length !== 0) {
       //   setGainData([...acc])
       // }
-    }, [])
-
-    console.log(newArr)
-
-    console.log(gainData)
-
-    if (gainData.length !== 0) {
-      gainData.map((element) => {})
+      // }, [])
+      // console.log(newArr)
+      // console.log(gainData)
+      // if (gainData.length !== 0) {
+      //   gainData.map((element) => {})
+      // }
     }
+    recursion(analysis, numberOfIndex)
+    console.log("gain", gain)
+    console.log(gainElements)
   }
 
   // console.log(gainData)
