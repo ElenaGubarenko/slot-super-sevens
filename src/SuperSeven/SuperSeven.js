@@ -12,7 +12,7 @@ function SuperSeven() {
   const [gain, setGain] = useState(0)
   const [gameOn, setGameOn] = useState(false)
   const [drumsData, setDrumsData] = useState({})
-  const [gainData, setGainData] = useState([])
+  const [gainData, setGainData] = useState(0)
   const [changedPids, setChangedPids] = useState({})
 
   useEffect(() => {
@@ -61,6 +61,7 @@ function SuperSeven() {
   }
 
   const countGain = () => {
+    setGainData(0)
     let numberOfIndex = 0
     const gainElements = []
     let gain = ""
@@ -92,38 +93,39 @@ function SuperSeven() {
           break
         }
       }
-
-      // const dataToAnalysis = Object.values(drumsData)
-      // let newArr = []
-      // dataToAnalysis.reduce((acc, current) => {
-      //   newArr = [...newArr, ...current]
-      //   if (newArr[0] === newArr[3] && newArr[0] === newArr[6]) {
-      //     acc.push(newArr[0])
-      //   }
-      //   if (newArr[1] === newArr[4] && newArr[1] === newArr[7]) {
-      //     acc.push(newArr[1])
-      //   }
-      //   if (newArr[2] === newArr[5] && newArr[2] === newArr[8]) {
-      //     acc.push(newArr[2])
-      //   }
-      //   setGainData([...acc])
-      //   return acc
-      // if (acc && acc.length !== 0) {
-      //   setGainData([...acc])
-      // }
-      // }, [])
-      // console.log(newArr)
-      // console.log(gainData)
-      // if (gainData.length !== 0) {
-      //   gainData.map((element) => {})
-      // }
     }
     recursion(analysis, numberOfIndex)
-    console.log("gain", gain)
-    console.log(gainElements)
+
+    const gainSum = []
+    const increaseCredits = []
+
+    gainElements.map((element) => {
+      gainSum.push(options.gain[element])
+    })
+
+    if (gainSum.length === 0) {
+      setCredits(credits - totalBet)
+    }
+
+    if (gainSum.length > 0) {
+      gainSum.map((element) => {
+        increaseCredits.push(element * gameBet)
+      })
+
+      if (increaseCredits.length > 0) {
+        increaseCredits.reduce((acc, current) => {
+          acc = acc + current
+          setGainData(acc)
+          console.log("acc", acc)
+          return acc
+        }, 0)
+      }
+
+      setCredits(credits)
+    }
   }
 
-  // console.log(gainData)
+  // console.log("gainData", gainData)
 
   const startGame = () => {
     setGameOn(!gameOn)
