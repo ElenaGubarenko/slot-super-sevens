@@ -1,3 +1,101 @@
+input {
+  border-radius: 5px;
+  text-align: center;
+  outline: none;
+}
+
+button {
+  background-color: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+span {
+  margin-right: 20px;
+}
+
 .SuperSeven {
   display: flex;
+  justify-content: space-between;
+}
+
+.Container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) ;
+  display: flex;
+  flex-direction:row ;
+  flex-wrap: wrap;
+  padding: 20px;
+  border: 3px solid grey;
+  border-radius: 5px;
+
+}
+
+.DrumsAndInputs {
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: column;
+}
+
+.InputsDiv{
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 10px;
+  text-align: center;
+}
+
+.InputDiv {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.ButtonsStartDiv {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.ButtonStart {
+  width: 150px;
+  height: 30px;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-top: 15px;
+}
+
+.ButtonStart:hover, .ButtonStart:focus , .RestartGameButton:hover, .RestartGameButton:focus {
+  background-color: rgb(226, 226, 226);
+}
+
+.ButtonInInputs {
+  position: absolute;
+  border-radius: 50%;
+  border: none;
+  width: 20px;
+  height: 20px;
+  font-size: 15px;
+}
+
+.IncreaseButton {
+right: 12px;
+}
+
+.ButtonInInputs:hover, .ButtonInInputs:focus {
+  font-weight: bold;
+}
+
+.RestartGameButton{
+  width: 150px;
+  height: 30px;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+}  
+
+.ButtonsReStartDiv {
+  display: flex;
+  flex-direction: column;
 }
