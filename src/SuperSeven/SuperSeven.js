@@ -5,8 +5,8 @@ import styles from "./SuperSeven.module.css"
 import { v4 as uuidv4 } from "uuid"
 
 function SuperSeven() {
-  const [lines, setLines] = useState(5)
-  const [credits, setCredits] = useState(10000)
+  const [lines, setLines] = useState(3)
+  const [credits, setCredits] = useState(1000)
   const [gameBet, setGameBet] = useState(100)
   const [totalBet, setTotalBet] = useState(0)
   const [gain, setGain] = useState(0)
@@ -45,19 +45,19 @@ function SuperSeven() {
   }, [lines, gameBet])
 
   const increaseLines = () => {
-    lines >= 50 ? console.log("too much lines") : setLines(lines + 5)
+    lines >= 50 ? console.log("too much lines") : setLines(lines + 3)
   }
 
   const decreaseLines = () => {
-    lines <= 0 ? console.log("zero lines") : setLines(lines - 5)
+    lines <= 0 ? console.log("zero lines") : setLines(lines - 3)
   }
 
   const increaseBet = () => {
-    gameBet >= 1000 ? console.log("too much bet") : setGameBet(gameBet + 100)
+    gameBet >= 1000 ? console.log("too much bet") : setGameBet(gameBet + 50)
   }
 
   const decreaseBet = () => {
-    gameBet <= 0 ? console.log("zero bet") : setGameBet(gameBet - 100)
+    gameBet <= 0 ? console.log("zero bet") : setGameBet(gameBet - 50)
   }
 
   const countGain = () => {
@@ -67,8 +67,6 @@ function SuperSeven() {
     const gainElements = []
     let gain = ""
     const analysis = Object.values(drumsData)
-
-   
 
     const recursion = (arr, index) => {
       for (let i = 0; i < arr.length; i += 1) {
@@ -110,7 +108,7 @@ function SuperSeven() {
       setCredits(credits - totalBet)
     }
 
-    if (credits === 0 || credits<0) {
+    if (credits === 0 || credits < 0) {
       setGameOver(true)
       return
     }
@@ -140,7 +138,6 @@ function SuperSeven() {
     })
 
     countGain()
-    return 1
   }
 
   const restartGame = () => {
@@ -151,10 +148,9 @@ function SuperSeven() {
     setDrumsData({})
   }
 
+  // const autoStart = () => {
 
-  const autoStart = (func, count) => {
-func()
-  }
+  // }
 
   return (
     <div className={styles.Parent}>
@@ -225,9 +221,9 @@ func()
               <button className={styles.ButtonStart} onClick={startGame}>
                 Start
               </button>
-              <button className={styles.ButtonStart} onClick={() => autoStart(startGame, 10)}>
+              {/* <button className={styles.ButtonStart} onClick={autoStart}>
                 AutoStart
-              </button>
+              </button> */}
             </div>
           </div>
         )}
@@ -237,5 +233,3 @@ func()
 }
 
 export default SuperSeven
-
-// credits / totalBet
