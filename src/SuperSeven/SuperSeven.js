@@ -131,7 +131,7 @@ function SuperSeven() {
 
   const startGame = () => {
     setGameOn(!gameOn)
-
+    console.log("1111")
     options.base_reels.map((arr) => {
       const index = options.base_reels.indexOf(arr)
       drumsData[`${index}`] = randomizer(arr)
@@ -148,9 +148,41 @@ function SuperSeven() {
     setDrumsData({})
   }
 
-  // const autoStart = () => {
+  const autoStart = () => {
+    const rec = (callback) => {
+      for (let i = 0; i < 10; i += 1) {
+        if (credits > 0 && credits !== 0) {
+          console.log("rec")
+          callback()
 
-  // }
+          continue
+        }
+        if (credits < 0 || credits === 0) {
+          break
+        }
+      }
+    }
+    rec(startGame)
+
+    // for (let i = 0; i < 10; i += 1) {
+    //   if (credits > 0 && credits !== 0) {
+    //     callback()
+    //     continue
+    //   }
+    //   if (credits < 0 && credits === 0) {
+    //     break
+    //   }
+    // }
+
+    // autoStart(callback)
+
+    // console.log(callback())
+    // console.log("h")
+
+    // while (credits > 0 && credits !== 0) {
+    //   callback()
+    // }
+  }
 
   return (
     <div className={styles.Parent}>
@@ -221,9 +253,9 @@ function SuperSeven() {
               <button className={styles.ButtonStart} onClick={startGame}>
                 Start
               </button>
-              {/* <button className={styles.ButtonStart} onClick={autoStart}>
+              <button className={styles.ButtonStart} onClick={autoStart}>
                 AutoStart
-              </button> */}
+              </button>
             </div>
           </div>
         )}
