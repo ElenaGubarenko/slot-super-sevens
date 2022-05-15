@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid"
 
 function SuperSeven() {
   const [lines, setLines] = useState(3)
-  const [credits, setCredits] = useState(1000)
+  const [credits, setCredits] = useState(10000)
   const [gameBet, setGameBet] = useState(100)
   const [totalBet, setTotalBet] = useState(0)
   const [gain, setGain] = useState(0)
